@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:validators/validators.dart' as validator;
+import 'package:email_validator/email_validator.dart';
 
 
 import 'package:flutter_svg/flutter_svg.dart';
@@ -112,7 +113,7 @@ class _SignUpState extends State<SignUp> {
 											keyboard: TextInputType.emailAddress,
 											controller: emailController,
 											validate: (String val) {
-												if(!validator.isEmail(val)){
+												if(!EmailValidator.validate(val)){
 													return "Invalid email input";
 												}
 												return null;
