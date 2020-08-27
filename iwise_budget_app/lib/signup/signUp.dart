@@ -34,7 +34,7 @@ class _SignUpState extends State<SignUp> {
 
   _onSubmit() async {
     if (_form.currentState.validate()) {
-      createUser("http://iwise.herokuapp.com/api/auth/signup", body: model.toMap());
+     await createUser("http://iwise.herokuapp.com/api/auth/signup", body: model.toMap());
       print(model.toMap());
     }else {
       throw new Exception(Error);
@@ -49,7 +49,8 @@ Future <SignUpModel> createUser(String url, {Map body}) async {
     if(statusCode < 200 || statusCode > 400 || json == null){
       throw new Exception("Unable to register new user");
     }else {
-      return SignUpModel.fromJson(json.decode(response.body));
+      // return SignUpModel.fromJson(json.decode(response.body));
+      print(response.body);
     }
   });
 }
@@ -84,7 +85,7 @@ Future <SignUpModel> createUser(String url, {Map body}) async {
             children: [
               Image.asset('assets/login.png'),
               SizedBox(
-                height: 24,
+                height: 15,
               ),
               Text(
                 'Create an Account',
@@ -96,9 +97,6 @@ Future <SignUpModel> createUser(String url, {Map body}) async {
               ),
               SizedBox(
                 height: 20,
-              ),
-              Text(
-                'In just few steps create an account and \n get access to your financial freedom',
               ),
               SizedBox(
                 height: 20,
