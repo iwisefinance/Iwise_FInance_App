@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:validators/validators.dart' as validator;
 import 'package:email_validator/email_validator.dart';
 import 'package:http/http.dart' as http;
 
@@ -43,13 +42,15 @@ class _SignUpState extends State<SignUp> {
 
 Future <SignUpModel> createUser(String url, {Map body}) async {
   var newBody = json.encode(body);
-  return await http.post(url, headers: {'Content-type': 'application/json','Accept': 'application/json'} ,body: newBody ).then((http.Response response) {
+  return await http.post(url, headers: {'Content-type': 'application/json','Accept': 'application/json'} ,body: newBody )
+  .then((http.Response response) {
     final int statusCode = response.statusCode;
 
     if(statusCode < 200 || statusCode > 400 || json == null){
       throw new Exception("Unable to register new user");
     }else {
       // return SignUpModel.fromJson(json.decode(response.body));
+      Navigator.pushReplacementNamed(context, '/login');
       print(response.body);
     }
   });

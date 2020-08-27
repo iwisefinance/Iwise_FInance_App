@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:email_validator/email_validator.dart';
+import 'package:http/http.dart' as http;
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iwisebudgetapp/components/colors.dart';
@@ -18,15 +22,26 @@ class _LoginState extends State<Login> {
 
   	_onSubmit(){
 		if (_loginForm.currentState.validate()) {
-			Navigator.pushReplacementNamed(context, '/individualDashboard');
-      //  var user = (
-        // 
-      //  )
-			print(loginModel.UserfullName);
-			print(loginModel.UserPassword);
-		}
+			// Navigator.pushReplacementNamed(context, '/individualDashboard');
+      userLogin("http://iwise.herokuapp.com/api/auth/login", body: loginModel.toMap());
+			print(loginModel.toMap());
+      		}
 	}
 
+
+Future <LoginModel> userLogin(String url, {Map body}) async {
+  var newBody = json.encode(body);
+  return await http.post(url, headers: {'Content-type': 'application/json','Accept': 'application/json'} ,body: newBody)
+  .then((http.Response response)  {
+    final int statusCode = response.statusCode;
+    if(statusCode < 200 || statusCode > 400 || json == null){
+      throw new Exception("Invalid login parameters");
+    }else {
+      print(response.body);
+    }
+    return null;
+  });
+}
   LoginModel loginModel = LoginModel();
 
   @override
@@ -46,18 +61,8 @@ class _LoginState extends State<Login> {
                 style: GoogleFonts.raleway(
                     textStyle: TextStyle(
                         color: mainColor,
-                        letterSpacing: 2,
                         fontSize: 20,
                         fontWeight: FontWeight.bold)),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-                'We are glad to have you join us again \n Login to create budget and get free coins',
-                style: TextStyle(
-                  fontSize: 15,
-                ),
               ),
               SizedBox(
                 height: 20,
@@ -72,11 +77,14 @@ class _LoginState extends State<Login> {
                       validate: (String val) {
                         if (val.isEmpty) {
                           return "This field can't be empty";
-                        } else
+                        } if(!EmailValidator.validate(val)){
+                            return "Invalid email input";
+                        }
+                         else
                           return null;
                       },
                       saved: (String val) {
-                        loginModel.UserfullName = val;
+                        loginModel.username = val;
                       },
                     ),
                     SizedBox(
@@ -98,7 +106,7 @@ class _LoginState extends State<Login> {
                         return null;
                       },
                       saved: (String val) {
-                        loginModel.UserPassword = val;
+                        loginModel.password = val;
                       },
                     ),
                     SizedBox(

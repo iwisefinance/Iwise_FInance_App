@@ -12,8 +12,8 @@ class SignUpModel {
       return SignUpModel(
         name: json['name'],
         username: json['username'],
-        email: json['userEmail'],
-        password: json['userpassword']
+        email: json['email'],
+        password: json['password']
       );
     }
 
