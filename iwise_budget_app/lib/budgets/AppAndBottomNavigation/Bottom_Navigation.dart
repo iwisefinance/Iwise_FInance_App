@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:iwisebudgetapp/components/colors.dart';
 
 class BottomNavigation extends StatefulWidget{
 
@@ -21,6 +22,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
           BottomNavigationBarItem(
             icon: FlatButton(
               onPressed: (){
+                backgroundColor: Colors.blue;
                 Navigator.pushReplacementNamed(context, '/individualDashboard');
               },
                 child: Container(
@@ -34,7 +36,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
           BottomNavigationBarItem(
             icon: FlatButton(
               onPressed: (){
-//                Navigator.pushReplacementNamed(context, '/individualDashboard');
+               Navigator.pushReplacementNamed(context, '/individualDashboard');
               },
               child: Container(
                 child: Icon(Icons.equalizer, size: 30.0, color: Color(0xff555A5B)),
