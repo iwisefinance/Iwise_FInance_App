@@ -2,23 +2,20 @@ import 'package:flutter/material.dart';
 
 class LoginModel {
 	String username;
-	String email;
 	String password;
 
-	LoginModel({this.username, this.email, this.password});
+	LoginModel({this.username, this.password});
 
   factory LoginModel.fromJson(Map<String, dynamic> json){
   return LoginModel(
-    username: json['name'],
-    email: json['email'],
+    username: json['usernameOrEmail'],
     password: json['password']
   );
 }
 
  Map toMap() {
    var map = new Map<String, dynamic>();
-   map['username'] = username;
-   map['email'] = email;
+   map['usernameOrEmail'] = username;
    map['password'] = password;
    return map;
  }

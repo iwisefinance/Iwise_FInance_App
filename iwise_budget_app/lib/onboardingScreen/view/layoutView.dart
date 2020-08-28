@@ -91,7 +91,7 @@ class _SliderLayoutViewState extends State<SliderLayoutView> {
                         padding: EdgeInsets.only(left: 8.0, bottom: 8.0),
                         child: FlatButton(
                           onPressed: () {
-                            Navigator.pushReplacementNamed(context, '/signUp');
+                            Navigator.pushReplacementNamed(context, '/login');
                           },
                           child: Text(
                             Constants.SKIP,

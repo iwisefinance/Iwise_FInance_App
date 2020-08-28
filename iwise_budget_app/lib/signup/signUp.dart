@@ -89,11 +89,11 @@ Future <SignUpModel> createUser(String url, {Map body}) async {
                 height: 15,
               ),
               Text(
-                'Create an Account',
+                'Create Account',
                 style: GoogleFonts.raleway(
                     textStyle: TextStyle(
                         color: mainColor,
-                        fontSize: 30,
+                        fontSize: 20,
                         fontWeight: FontWeight.bold)),
               ),
               SizedBox(
@@ -211,18 +211,18 @@ Future <SignUpModel> createUser(String url, {Map body}) async {
                     InkWell(
                       onTap: _onSubmit,
                       child: Container(
-                        width: double.infinity,
-                        height: 56,
+                       width: 230.0,
+                       height: 60,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(7),
+                          borderRadius: BorderRadius.circular(100),
                           color: mainColor,
                         ),
                         child: Center(
                           child: Text(
-                            'CREATE ACCOUNT',
+                            'Create account',
                             style: TextStyle(
                               color: white,
-                              fontSize: 20,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                             ),
                           ),

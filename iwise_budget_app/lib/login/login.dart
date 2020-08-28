@@ -22,7 +22,7 @@ class _LoginState extends State<Login> {
 
   	_onSubmit(){
 		if (_loginForm.currentState.validate()) {
-			// Navigator.pushReplacementNamed(context, '/individualDashboard');
+			Navigator.pushReplacementNamed(context, '/individualDashboard');
       userLogin("http://iwise.herokuapp.com/api/auth/login", body: loginModel.toMap());
 			print(loginModel.toMap());
       		}
@@ -31,7 +31,7 @@ class _LoginState extends State<Login> {
 
 Future <LoginModel> userLogin(String url, {Map body}) async {
   var newBody = json.encode(body);
-  return await http.post(url, headers: {'Content-type': 'application/json','Accept': 'application/json'} ,body: newBody)
+  return await http.post(url, headers: {'Content-type': 'application/json','Accept': 'application/json'}, body: newBody)
   .then((http.Response response)  {
     final int statusCode = response.statusCode;
     if(statusCode < 200 || statusCode > 400 || json == null){
@@ -73,12 +73,13 @@ Future <LoginModel> userLogin(String url, {Map body}) async {
                   children: <Widget>[
                     TextValues(
                       title: 'Username or Email',
+                      icon: Icon(Icons.email),
                       obscure: false,
                       validate: (String val) {
                         if (val.isEmpty) {
-                          return "This field can't be empty";
+                          return "All fields are required.";
                         } if(!EmailValidator.validate(val)){
-                            return "Invalid email input";
+                            return "Invalid email input.";
                         }
                          else
                           return null;
@@ -92,15 +93,16 @@ Future <LoginModel> userLogin(String url, {Map body}) async {
                     ),
                     TextValues(
                       passwordLength: 10,
+                      icon: Icon(Icons.lock),
                       title: 'Password',
                       obscure: true,
                       controller: passwordController,
                       validate: (String val) {
                         if (val.isEmpty) {
-                          return "Password is required";
+                          return "All fields are required.";
                         }
                         if (val.length < 10) {
-                          return "Password must be greater than 8 characters";
+                          return "Password must be greater than 8 characters.";
                         }
                         _loginForm.currentState.save();
                         return null;
@@ -115,10 +117,10 @@ Future <LoginModel> userLogin(String url, {Map body}) async {
                     InkWell(
                       onTap: _onSubmit,
                       child: Container(
-                        width: double.infinity,
-                        height: 56,
+                        width: 230.0,
+                        height: 50,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(7),
+                          borderRadius: BorderRadius.circular(100.0),
                           color: mainColor,
                         ),
                         child: Center(
@@ -126,7 +128,7 @@ Future <LoginModel> userLogin(String url, {Map body}) async {
                             'Login',
                             style: TextStyle(
                               color: white,
-                              fontSize: 20,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -154,8 +156,9 @@ Future <LoginModel> userLogin(String url, {Map body}) async {
                           child: Padding(
                             padding: EdgeInsets.all(5.0),
                             child: Text(
-                              'Create Account',
+                              'Create one',
                               style: TextStyle(
+                                  
                                   color: mainColor,
                                   fontWeight: FontWeight.w500),
                             ),
